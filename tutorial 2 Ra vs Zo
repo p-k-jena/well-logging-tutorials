@@ -1,0 +1,30 @@
+
+Za_ZLs = [0 1 2 3 4 5 10 20 40 100];
+Zo_ZLs = [0.5 1.5 2.5 3.5 4.5 5.5 10.5 20.5 40.5 100.5];
+
+N_Za_ZLs = (-1).*[0 0.5 1 2 3 4 5 8 10 20 40 100];
+N_Zo_ZLs = (-1).*[0.5 0.1 1.5 2.5 3.5 4.5 5.5 8.5 10.5 20.5 40.5 100.5 ];
+r1 = 90;
+r2 = 10;
+Ls = 64;
+Ls = Ls*2.54;
+Cr = (r1-r2)/(r1+r2);
+Ra = (1+(Cr./((2*(Za_ZLs))+1)))*r2
+Zo = Zo_ZLs*Ls;
+plot(Ra,Zo/100,'linewidth',1)
+xlim([0,100])
+xlabel('Apparent Resistivity (in ohm meter)')
+ylabel('Zo ( in meter)')
+hold on
+scatter(Ra,Zo/100,'linewidth',0.5)
+N_Ra = (1+(Cr./((2*(N_Za_ZLs))-1)))*r1
+N_Zo = N_Zo_ZLs*Ls;
+hold on
+plot(N_Ra,N_Zo/100,'linewidth',1)
+hold on
+scatter(N_Ra,N_Zo/100,'linewidth',0.5)
+Ra_all = [Ra,N_Ra]';
+
+% T = table((Za_ZLs)',(Zo_ZLs)',(Ra)',(Zo/100)');
+% 
+% writetable(T,'wl.xlsx','sheet',1,'Range','D1','WriteVariableNames',true)
